@@ -12,7 +12,7 @@ window.addEventListener("load", function () {
     event.preventDefault();
 
     //creamos el cuerpo de la request
-    const playload = {
+    const payload = {
       email: email.value,
       password: password.value,
     };
@@ -24,7 +24,7 @@ window.addEventListener("load", function () {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(playload),
+      body: JSON.stringify(payload),
     };
 
     //lanzamos la consulta de login a la API

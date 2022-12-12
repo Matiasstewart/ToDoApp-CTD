@@ -17,7 +17,7 @@ window.addEventListener('load', function () {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        const playload = {
+        const payload = {
             firstName: name.value,
             lastName: lastName.value,
             email: email.value,
@@ -29,7 +29,7 @@ window.addEventListener('load', function () {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(playload),
+            body: JSON.stringify(payload),
         };
 
         realizarRegister(settings)
