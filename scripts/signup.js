@@ -59,7 +59,7 @@ window.addEventListener('load', function () {
 
             if (data.jwt) {
                 //guardo en LocalStorage el objeto con el token
-                localStorage.setItem("jwt", JSON.stringify(data.jwt));
+                localStorage.setItem("jwt", JSON.stringify(data.jwt)); //<- Seria redundante ya que de por si ya es un string
 
                 //redireccionamos a la página
                 location.replace("./mis-tareas.html");

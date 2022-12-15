@@ -9,10 +9,10 @@ if (!localStorage.jwt) {
 window.addEventListener("load", function () {
   /* ---------------- variables globales y llamado a funciones ---------------- */
 
-  const url = `http://todo-api.ctd.academy:3000/v1/`;
-  const urlTareas = `${url}tasks`;
-  const urlUsuario = `${url}users/getMe`;
-  const urlCrearTarea = `${url}tasks`;
+  const url = `http://todo-api.ctd.academy:3000/v1`;
+  const urlTareas = `${url}/tasks`;
+  const urlUsuario = `${url}/users/getMe`;
+  const urlCrearTarea = `${url}/tasks`;
   const token = JSON.parse(localStorage.jwt);
 
   const formCrearTarea = document.querySelector(".nueva-tarea");
@@ -79,7 +79,10 @@ window.addEventListener("load", function () {
       .then((ress) => ress.json())
       .then((tareas) => {
         console.log("tareas del usuario");
-        console.log(tareas);
+        console.table(tareas);
+
+        renderizarTareas(tareas)
+        botonesCambioEstado()
       })
       .catch((err) => console.log(err));
 
@@ -113,6 +116,7 @@ window.addEventListener("load", function () {
 
     crearTarea(settings);
     consultarTareas();
+    botonBorrarTarea();
 
   });
 
@@ -135,12 +139,94 @@ window.addEventListener("load", function () {
   /* -------------------------------------------------------------------------- */
   /*                  FUNCIÓN 5 - Renderizar tareas en pantalla                 */
   /* -------------------------------------------------------------------------- */
-  function renderizarTareas(listado) {}
+  function renderizarTareas(listado) {
+    // obtengo listados y limpio cualquier contenido interno
+    const tareasPendientes = document.querySelector('.tareas-pendientes');
+    const tareasTerminadas = document.querySelector('.tareas-terminadas');
+
+    // limpiamos siempre las cajas
+    tareasPendientes.innerHTML = "";
+    tareasTerminadas.innerHTML = "";
+
+    listado.forEach(tarea => {
+
+      let fecha = new Date(tarea.createdAt);
+
+      // chequear si la tarea está terminada o no
+      if (tarea.completed) {
+        tareasTerminadas.innerHTML += `
+        <li class="tarea">
+          <div class="hecha">
+            <i class="fa-regular fa-circle-check"></i>
+          </div>
+          <div class="descripcion">
+            <p class="nombre">${tarea.description}</p>
+            <div class="cambios-estados">
+              <button class="change completa" id="${tarea.id}" ><i class="fa-solid fa-rotate-left"></i></button>
+              <button class="borrar" id="${tarea.id}"><i class="fa-regular fa-trash-can"></i></button>
+            </div>
+          </div>
+        </li>
+        `
+      } else {
+        // tareas pendientes
+        tareasPendientes.innerHTML += `
+        <li class="tarea">
+          <button class="change" id="${tarea.id}"><i class="fa-regular fa-circle"></i></button>
+          <div class="descripcion">
+            <p class="nombre">${tarea.description}</p>
+            <p class="timestamp">${fecha.toLocaleDateString()}</p>
+          </div>
+        </li>
+        `
+      }
+    })
+  }
 
   /* -------------------------------------------------------------------------- */
   /*                  FUNCIÓN 6 - Cambiar estado de tarea [PUT]                 */
   /* -------------------------------------------------------------------------- */
-  function botonesCambioEstado() {}
+  function botonesCambioEstado() {
+
+    const btnCambioEstado = document.querySelectorAll('.change');
+
+    btnCambioEstado.forEach(boton => {
+      //a cada boton le asignamos una funcionalidad
+      boton.addEventListener('click', function (event) {
+
+        console.log("Cambiando estado de tarea...");
+
+        const id = event.target.id;
+        const url = `${urlTareas}/${id}`
+        const payload = {};
+
+        //segun el tipo de boton que fue clickeado, cambiamos el estado de la tarea
+        if (event.target.classList.contains('completa')) {
+          // si está completada, la paso a pendiente
+          payload.completed = false;
+        } else {
+          // sino, está pendiente, la paso a completada
+          payload.completed = true;
+        }
+
+
+        const settingsCambio = {
+          method: 'PUT',
+          headers: {
+            "Authorization": token,
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        }
+        fetch(url, settingsCambio)
+          .then(response => {
+            console.log(response.status);
+            //vuelvo a consultar las tareas actualizadas y pintarlas nuevamente en pantalla
+            consultarTareas();
+          })
+      })
+    });
+  }
 
   /* -------------------------------------------------------------------------- */
   /*                     FUNCIÓN 7 - Eliminar tarea [DELETE]                    */
