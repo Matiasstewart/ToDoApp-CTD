@@ -83,6 +83,7 @@ window.addEventListener("load", function () {
 
         renderizarTareas(tareas)
         botonesCambioEstado()
+        botonBorrarTarea();
       })
       .catch((err) => console.log(err));
 
@@ -116,7 +117,6 @@ window.addEventListener("load", function () {
 
     crearTarea(settings);
     consultarTareas();
-    botonBorrarTarea();
 
   });
 
@@ -231,5 +231,32 @@ window.addEventListener("load", function () {
   /* -------------------------------------------------------------------------- */
   /*                     FUNCIÓN 7 - Eliminar tarea [DELETE]                    */
   /* -------------------------------------------------------------------------- */
-  function botonBorrarTarea() {}
+  function botonBorrarTarea() {
+    const deleteBtns = document.querySelectorAll('.borrar')
+
+    deleteBtns.forEach(btn =>{
+
+      btn.addEventListener("click",(e)=>{
+
+        const id = e.target.id;
+        const url = `${urlTareas}/${id}`
+
+        const deleteSettings = {
+          method: 'DELETE',
+          headers: {
+            "Authorization": token,
+          }
+        }
+
+        fetch(url, deleteSettings)
+          .then(response => {
+            console.log(response.status);
+            //vuelvo a consultar las tareas actualizadas y pintarlas nuevamente en pantalla
+            consultarTareas();
+          })
+
+      })
+
+    })
+  }
 });
