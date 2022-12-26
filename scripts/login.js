@@ -55,7 +55,12 @@ window.addEventListener("load", function () {
         console.log(response);
 
         if (!response.ok) {
-          alert("Alguno de los datos es incorrecto.")
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ingrese correctamente sus datos!',
+            footer: '<a href="../signup.html"> ¿No tienes una cuenta? Regístrate aquí <a>'
+          })
           btnIngreso.removeAttribute("disabled", "");
           invertirClases()
         }
