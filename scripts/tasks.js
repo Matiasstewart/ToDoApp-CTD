@@ -143,6 +143,8 @@ window.addEventListener("load", function () {
     // obtengo listados y limpio cualquier contenido interno
     const tareasPendientes = document.querySelector('.tareas-pendientes');
     const tareasTerminadas = document.querySelector('.tareas-terminadas');
+    const numeroFinalizadas = document.querySelector("#cantidad-finalizadas");
+    let contador = 0;
 
     // limpiamos siempre las cajas
     tareasPendientes.innerHTML = "";
@@ -154,6 +156,7 @@ window.addEventListener("load", function () {
 
       // chequear si la tarea está terminada o no
       if (tarea.completed) {
+        contador++;
         tareasTerminadas.innerHTML += `
         <li class="tarea">
           <div class="hecha">
@@ -180,7 +183,11 @@ window.addEventListener("load", function () {
         </li>
         `
       }
-    })
+      
+      })
+
+    numeroFinalizadas.innerText = contador
+
   }
 
   /* -------------------------------------------------------------------------- */

@@ -5,6 +5,10 @@ window.addEventListener("load", function () {
   const password = this.document.querySelector("#inputPassword");
   const url = "http://todo-api.ctd.academy:3000/v1/";
 
+  const btnIngreso = document.querySelector("#btnIngreso")
+  const btnImg = this.document.querySelector("#spinnerImg")
+  const textoBtnIngreso = this.document.querySelector("#textoBtnIngreso")
+
   /* -------------------------------------------------------------------------- */
   /*            FUNCIÓN 1: Escuchamos el submit y preparamos el envío           */
   /* -------------------------------------------------------------------------- */
@@ -30,6 +34,12 @@ window.addEventListener("load", function () {
     //lanzamos la consulta de login a la API
     realizarLogin(settings);
 
+    //Desactivamos el boton al hacer submit para que no se pueda clickear nuevamente y se vea el Spinner
+    btnIngreso.setAttribute("disabled", "");
+
+    //Llamamos a esta funcion para que desaparesca el texto del boton y aparezca el gif del spinner
+    invertirClases()
+
     //limpio los campos del formulario
     form.reset();
   });
@@ -45,7 +55,9 @@ window.addEventListener("load", function () {
         console.log(response);
 
         if (!response.ok) {
-          alert("Alguno de los datos es incorrecto.");
+          alert("Alguno de los datos es incorrecto.")
+          btnIngreso.removeAttribute("disabled", "");
+          invertirClases()
         }
 
         return response.json();
@@ -66,5 +78,17 @@ window.addEventListener("load", function () {
         console.log("Promasa rechazada !");
         console.log(err);
       });
-  }
-});
+    }
+    
+    /* -------------------------------------------------------------------------- */
+    /*                           FUNCION: SPINNER CARGA                           */
+    /* -------------------------------------------------------------------------- */
+    
+    function invertirClases() {
+      btnImg.classList.toggle("oculto");
+      textoBtnIngreso.classList.toggle("oculto");
+    }
+
+  });
+  
+  
