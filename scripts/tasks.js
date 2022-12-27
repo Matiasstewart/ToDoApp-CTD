@@ -104,6 +104,8 @@ window.addEventListener("load", function () {
         renderizarTareas(tareas)
         botonesCambioEstado()
         botonBorrarTarea();
+        removerSkeleton(".tareas-pendientes")
+        removerSkeleton(".tareas-terminadas")
       })
       .catch((err) => console.log(err));
 
