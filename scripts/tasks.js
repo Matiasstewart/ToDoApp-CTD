@@ -7,6 +7,9 @@ if (!localStorage.jwt) {
 
 /* ------ comienzan las funcionalidades una vez que carga el documento ------ */
 window.addEventListener("load", function () {
+  /* ---------------------- Inicializamos la libreria AOS --------------------- */
+  AOS.init();
+
   /* ---------------- variables globales y llamado a funciones ---------------- */
 
   const url = `http://todo-api.ctd.academy:3000/v1`;
@@ -180,7 +183,7 @@ window.addEventListener("load", function () {
       if (tarea.completed) {
         contador++;
         tareasTerminadas.innerHTML += `
-        <li class="tarea">
+        <li class="tarea" data-aos="flip-up">
           <div class="hecha">
             <i class="fa-regular fa-circle-check"></i>
           </div>
@@ -196,7 +199,7 @@ window.addEventListener("load", function () {
       } else {
         // tareas pendientes
         tareasPendientes.innerHTML += `
-        <li class="tarea">
+        <li class="tarea" data-aos="flip-up">
           <button class="change" id="${tarea.id}"><i class="fa-regular fa-circle"></i></button>
           <div class="descripcion">
             <p class="nombre">${tarea.description}</p>

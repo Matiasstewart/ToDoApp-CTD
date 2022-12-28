@@ -36,7 +36,7 @@
       </div>
 
       <label>Nombre</label>
-      <input id="inputNombre" type="text">
+      <input id="inputNombre" type="text" >
 
       <label>Apellido</label>
       <input id="inputApellido" type="text">
@@ -50,7 +50,12 @@
       <label>Repetir contraseña</label>
       <input id="inputPasswordRepetida" type="password">
 
-      <button type="submit">Crear Cuenta</button>
+      <div id="containerErroresSingup">
+        <ul id="listErroresSingup">
+        </ul>
+      </div>
+
+      <button id="submitBtn" type="submit">Crear Cuenta</button>
     </form>
 
     <div class="ingresarA">

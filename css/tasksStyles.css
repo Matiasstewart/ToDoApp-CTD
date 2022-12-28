@@ -251,9 +251,10 @@ footer img {
     .skeleton-card {
     display: flex;
     align-items: center;
+    border-radius: .5em;
     justify-content: space-between;
     flex: 1;
-    padding: 1em 2em;
+    padding: .8rem 1rem;
     box-shadow: 2px 2px 5px lightgrey;
     animation: loadingContainerAnimation 2s linear infinite;
     }
