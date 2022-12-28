@@ -18,7 +18,7 @@ header {
     margin-bottom: 3rem;
 }
 
-#titleTasks{
+#titleTasks {
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     color: var(--app-grey);
@@ -241,14 +241,14 @@ footer img {
     height: 100%;
 }
 
- /* SKELETON */
+/* SKELETON */
 .skeleton-container {
     display: flex;
     align-items: center;
     margin-bottom: 1.5em;
-    }
-    
-    .skeleton-card {
+}
+
+.skeleton-card {
     display: flex;
     align-items: center;
     border-radius: .5em;
@@ -257,35 +257,63 @@ footer img {
     padding: .8rem 1rem;
     box-shadow: 2px 2px 5px lightgrey;
     animation: loadingContainerAnimation 2s linear infinite;
-    }
-    
-    .skeleton-text {
+}
+
+.skeleton-text {
     animation: loadingTextAnimation 2s linear infinite;
     width: 150px;
     display: block;
     padding: 0.7rem;
-    }
-    
-    @keyframes loadingContainerAnimation {
+}
+
+@keyframes loadingContainerAnimation {
     0% {
-    background: white;
+        background: white;
     }
+
     50% {
-    background: rgb(182, 177, 177);
+        background: rgb(182, 177, 177);
     }
+
     100% {
-    background: white;
+        background: white;
     }
-    }
-    
-    @keyframes loadingTextAnimation {
+}
+
+@keyframes loadingTextAnimation {
     0% {
-    background: white;
+        background: white;
     }
+
     50% {
-    background: rgb(128, 123, 123);
+        background: rgb(128, 123, 123);
     }
+
     100% {
-    background: white;
+        background: white;
     }
-    }
+}
+
+
+/* --------------------------------- ERRORES -------------------------------- */
+
+.inputError{
+    outline: none;
+    border: 2px solid rgb(245, 90, 90);
+}
+
+#listaErrorTarea {
+    list-style-type: none;
+}
+
+#errorTarea {
+    background-color: #e0b4b4;
+    color: rgb(182, 1, 1);
+    margin-top: .5rem;
+    margin-bottom: .7rem;
+    border-radius: .5rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

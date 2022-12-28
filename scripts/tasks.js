@@ -46,17 +46,18 @@ window.addEventListener("load", function () {
       cancelButtonColor: "d33",
       confirmButtonText: "Confirmar",
       cancelButtonText: "Cancelar",
-      }).then((result)=>{
-        if(result.isConfirmed){
-          Swal.fire({
-            title: "¡Hasta luego!",
-            text: "Te esperamos pronto.",
-            icon: "success",
-            showConfirmButton: false,});
-          localStorage.clear();
-          location.replace("../index.html")
-        }
-      });
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "¡Hasta luego!",
+          text: "Te esperamos pronto.",
+          icon: "success",
+          showConfirmButton: false,
+        });
+        localStorage.clear();
+        location.replace("../index.html")
+      }
+    });
   });
 
   /* -------------------------------------------------------------------------- */
@@ -126,26 +127,35 @@ window.addEventListener("load", function () {
 
     event.preventDefault()
 
-    const payload ={
-      description : nuevaTarea.value,
-      completed : false,
+    if (nuevaTarea.value.length <= 5 || nuevaTarea.value.length > 100) {
+      renderizarErrorTarea()
+    } else {
+
+      const payload = {
+        description: nuevaTarea.value,
+        completed: false,
+      }
+
+      const settings = {
+        method: "POST",
+        headers: {
+          authorization: token,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload),
+      };
+
+      crearTarea(settings);
+      consultarTareas();
+
+      listaErrorTarea.innerHTML = ""
+      nuevaTarea.classList.remove("inputError")
+
     }
-
-    const settings = {
-      method: "POST",
-      headers: {
-        authorization: token,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload),
-    };
-
-    crearTarea(settings);
-    consultarTareas();
 
   });
 
-  function crearTarea(settings){
+  function crearTarea(settings) {
 
     fetch(urlCrearTarea, settings)
       .then((response) => {
@@ -208,8 +218,8 @@ window.addEventListener("load", function () {
         </li>
         `
       }
-      
-      })
+
+    })
 
     numeroFinalizadas.innerText = contador
 
@@ -266,9 +276,9 @@ window.addEventListener("load", function () {
   function botonBorrarTarea() {
     const deleteBtns = document.querySelectorAll('.borrar')
 
-    deleteBtns.forEach(btn =>{
+    deleteBtns.forEach(btn => {
 
-      btn.addEventListener("click",(e)=>{
+      btn.addEventListener("click", (e) => {
 
         const id = e.target.id;
         const url = `${urlTareas}/${id}`
@@ -291,4 +301,15 @@ window.addEventListener("load", function () {
 
     })
   }
+
+  /* -------------- funcion para renderizar un error sobre tareas ------------- */
+
+  function renderizarErrorTarea() {
+    
+    listaErrorTarea.innerHTML = ""
+    listaErrorTarea.innerHTML += `<li id="errorTarea" class="error"> Las tareas deben tener al menos 5 caracteres y un maximo de 100 </li>`;
+    nuevaTarea.classList.add("inputError")
+
+  }
+
 });
