@@ -92,18 +92,37 @@ window.addEventListener('load', function () {
 
         if (!validarTexto(obj.firstName)) {
             errores.push("Ingrese un nombre valido")
+            name.classList.add("inputError")
+        } else {
+            name.classList.remove("inputError")
         }
 
-        if (validarTexto(obj.lastName) != true) {
+        if (!validarTexto(obj.lastName)) {
             errores.push("Ingrese un apellido valido")
+            lastName.classList.add("inputError")
+        } else {
+            lastName.classList.remove("inputError")
         }
 
-        if (validarEmail(obj.email) != true) {
+        if (!validarEmail(obj.email)) {
             errores.push("Ingrese un email valido")
+            email.classList.add("inputError")
+        } else {
+            email.classList.remove("inputError")
         }
 
-        if (validarContrasenia(obj.password) != true) {
+        if (!validarContrasenia(obj.password)) {
             errores.push("ingrese una contraseña valida")
+            password.classList.add("inputError")
+        } else {
+            password.classList.remove("inputError")
+        }
+
+        if(compararContrasenias(obj.password,obj.confirmPassword)){
+            errores.push("Las contraseñas no coinciden")
+            confirmPassword.classList.add("inputError")
+        } else {
+            confirmPassword.classList.remove("inputError")
         }
 
         return errores
@@ -117,12 +136,14 @@ window.addEventListener('load', function () {
             lastName: "",
             email: "",
             password: "",
+            confirmPassword: "",
         }
 
         datos.firstName = name.value;
         datos.lastName = lastName.value;
         datos.email = email.value;
         datos.password = password.value;
+        datos.confirmPassword = confirmPassword.value;
 
         return datos
     }

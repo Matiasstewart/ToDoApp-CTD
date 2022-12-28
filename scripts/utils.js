@@ -43,6 +43,10 @@ function validarContrasenia(password) {
 }
 
 function compararContrasenias(contrasenia_1, contrasenia_2) {
-    
+    if(contrasenia_1 === contrasenia_2){
+        return false
+    }
+
+    return true
 }
 
