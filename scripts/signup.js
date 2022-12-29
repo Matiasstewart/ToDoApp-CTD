@@ -42,7 +42,7 @@ window.addEventListener('load', function () {
             body: JSON.stringify(payload),
         };
 
-        if(datosValidados.length>0){
+        if (datosValidados.length > 0) {
             renderizarErrores(datosValidados)
         } else {
             realizarRegister(settings)
@@ -118,7 +118,7 @@ window.addEventListener('load', function () {
             password.classList.remove("inputError")
         }
 
-        if(compararContrasenias(obj.password,obj.confirmPassword)){
+        if (compararContrasenias(obj.password, obj.confirmPassword)) {
             errores.push("Las contraseñas no coinciden")
             confirmPassword.classList.add("inputError")
         } else {
