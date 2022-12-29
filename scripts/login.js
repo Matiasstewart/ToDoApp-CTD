@@ -42,15 +42,18 @@ window.addEventListener("load", function () {
       renderizarErrores(datosValidados)
     } else {
       
+      
       //lanzamos la consulta de login a la API
       realizarLogin(settings);
-  
+      
       //Desactivamos el boton al hacer submit para que no se pueda clickear nuevamente y se vea el Spinner
       btnIngreso.setAttribute("disabled", "");
-  
+      
       //Llamamos a esta funcion para que desaparesca el texto del boton y aparezca el gif del spinner
       invertirClases()
-  
+      
+      borrarErrores()
+
       //limpio los campos del formulario
       form.reset();
     
@@ -76,7 +79,6 @@ window.addEventListener("load", function () {
           })
           btnIngreso.removeAttribute("disabled", "");
           invertirClases()
-          datosValidados=[]
           form.reset()
         }
 
@@ -158,6 +160,11 @@ window.addEventListener("load", function () {
     });
   }
 
+/* --------------------- funcion para borrar los errores -------------------- */
+
+function borrarErrores(){
+  listErroresLogin.innerHTML = "";
+}
 
 });
 
