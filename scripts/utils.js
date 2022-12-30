@@ -17,7 +17,9 @@ function validarTexto(texto) {
 }
 
 function normalizarTexto(texto) {
-    
+    let textoNormalizado
+    textoNormalizado = texto.toLowerCase()
+    return textoNormalizado
 }
 
 /* ---------------------------------- email --------------------------------- */
@@ -30,7 +32,9 @@ function validarEmail(email) {
 }
 
 function normalizarEmail(email) {
-    
+    let emailNormalizado
+    emailNormalizado = email.toLowerCase()
+    return emailNormalizado
 }
 
 /* -------------------------------- password -------------------------------- */
