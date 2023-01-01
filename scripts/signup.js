@@ -8,6 +8,9 @@ window.addEventListener('load', function () {
     const confirmPassword = document.querySelector("#inputPasswordRepetida")
     const url = "http://todo-api.ctd.academy:3000/v1/"
 
+    const leyendaPassword = this.document.querySelector("#leyendaPassword")
+    const leyendaPasswordContainer = document.querySelector("#leyendaPasswordContainer")
+
     const listaErrores = document.querySelector("#listErroresSingup")
 
     const submitBtn = document.querySelector("#submitBtn")
@@ -158,6 +161,19 @@ window.addEventListener('load', function () {
             listaErrores.innerHTML += `<li id="error-${index}" class="error"> ${element} </li>`;
         });
     }
+
+    /* Escuchamos el click de la contraseña y procedemos a mostrar una leyenda orientativa */
+
+    password.addEventListener("focus",e=>{
+        leyendaPassword.classList.remove("leyendaPasswordOculta")
+        leyendaPasswordContainer.classList.remove("leyendaPasswordContainerOculta")
+    })
+
+    password.addEventListener("focusout",e=>{
+        leyendaPassword.classList.add("leyendaPasswordOculta")
+        leyendaPasswordContainer.classList.remove("leyendaPasswordContainerOculta")
+
+    })
 
 
 });

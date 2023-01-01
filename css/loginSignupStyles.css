@@ -141,3 +141,23 @@ form button:hover{
     list-style-type: none;
 }
 
+.leyendaPasswordOculta{
+    display: none;
+}
+
+.leyendaPasswordContainerOculta{
+    display: none;
+}
+
+#leyendaPasswordContainer{
+    background-color: #8a6df1;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+#leyendaPassword{
+    font-size: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+}
